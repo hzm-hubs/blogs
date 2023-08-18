@@ -1,6 +1,6 @@
 # Webpack
 
-webpack 是一个现代 JavaScript 应用程序的静态模块打包器。（主要用于项目打包）
+webpack 是一个现代 JavaScript 应用程序的静态模块打包器, 将所有模块引入整理后，通过 loader 和 plugin 处理后，打包输出。（主要用于项目打包）
 
 官网：https://webpack.docschina.org/concepts/
 
@@ -50,3 +50,5 @@ module.exports = {
     ],
 };
 ```
+
+PS: webpack 可以通过 `babel-loader` 使用 Babel

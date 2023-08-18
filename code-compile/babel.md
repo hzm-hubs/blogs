@@ -65,6 +65,10 @@ presets 是一组预定义的插件集合，用于指定要在代码转换过程
 
 以下是一些常用插件
 
+- @babel/cli: Babel附带了一个内置的CLI，可用于从命令行编译文件。
+
+- @babel/core: 使用本地配置文件
+
 - @babel/preset-env: 这是Babel的主要preset，根据目标环境自动确定需要的插件和转换规则。它可以根据你所配置的目标浏览器、Node.js版本或其他运行环境，自动启用适当的转换插件。
 
 - @babel/preset-react: 用于转换React代码的preset。它能够将JSX语法转换为普通的JavaScript代码，以及提供一些与React开发相关的转换规则。
@@ -86,6 +90,10 @@ presets 是一组预定义的插件集合，用于指定要在代码转换过程
 - @babel/preset-typescript: 用于转换TypeScript代码的preset。它可以将TypeScript的特定语法和类型注解转换为JavaScript代码。
 
 - @babel/preset-flow: 用于转换Flow代码的preset。Flow是JavaScript的静态类型检查工具，而这个preset可以将Flow的类型注解和语法转换为普通的JavaScript代码。
+  
+- @babel/plugin-proposal-class-properties: 通过 Polyfill 方式在目标环境中添加缺失的特性
+  
+- @babel/polyfill: 编译 class
 
 此外 presets 中插件加载顺序与配置顺序是相反的
 
