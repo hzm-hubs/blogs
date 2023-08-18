@@ -8,9 +8,9 @@
   
 官网地址: https://zh-hans.eslint.org
 
-## 1 配置文件
+## 1 配置文件格式
 
-- 根目录下的eslint文件：`.eslintrc.js`、`.eslintrc.json`、`.eslint.config.js`。
+- 根目录下的eslint文件：`.eslintrc.js`、`.eslintrc.json`。
   
   *.js文件：
 
