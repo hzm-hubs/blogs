@@ -8,7 +8,11 @@
   
 官网地址: https://zh-hans.eslint.org
 
-## 1 配置文件格式
+## 1 安装
+
+  `npm i eslint -D`
+
+## 2 配置文件格式
 
 - 根目录下的eslint文件：`.eslintrc.js`、`.eslintrc.json`。
   
@@ -56,13 +60,13 @@
   ```
 - 编辑器设置如`vscode`，安装`ESlint`扩展插件后，在`vscode`的全局设置文件`setting.json`中设置eslint规则。
   
-## 2 `.eslintignore`
+## 3 `.eslintignore`
   在该文件中设置不被eslint检查的文件或文件夹,如：
   ```
   /node_modules
   /dist
   ```
-## 3 相关npm插件
+## 4 相关npm插件
 
 - eslint-config-prettier、eslint-plugin-prettier
 
@@ -91,7 +95,7 @@
 
 - eslint-config-import
 
-## 4 配置
+## 5 配置
 
 ### rules
 
