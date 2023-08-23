@@ -115,5 +115,22 @@
     'no-undefined': 2, // 不能使用undefined
   }
 }
+
+// 关闭装饰器@校验 配置 no-restricted-syntax 
+{
+  "rules": {
+    "no-restricted-syntax": [
+      "error",
+      { 
+        "selector": "Decorator", 
+        "message": "禁止使用装饰器" 
+      },
+      { 
+        "selector": "ExportDefaultDeclaration[declaration.type='ClassDeclaration']", 
+        "message": "禁止使用默认导出类声明" 
+      }
+    ]
+  }
+}
 ```
 		
