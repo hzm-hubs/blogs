@@ -1,5 +1,23 @@
 ### class 写法
 
+#### 生命周期顺序
+
+挂载
+* constructor
+* componentWillMount
+* render
+* componentDidMount
+
+更新
+* componentWillReceiveProps
+* shouldComponentUpdate
+* componentWillUpdate
+* render
+* componentDidUpdate
+卸载
+* componentWillUnmount
+
+
 ```
     import React, { PureComponent, Fragment } from "react";
 
@@ -46,7 +64,7 @@
         }
 
         // 组件销毁
-        componentDidUnMount() {
+        componentWillUnmount() {
 
         }
     }
