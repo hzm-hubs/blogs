@@ -14,7 +14,7 @@
 
 ## 2 配置文件格式
 
-- 根目录下的eslint文件：`.eslintrc.js`、`.eslintrc.json`。
+- 根目录下的eslint文件：`.eslintrc.js`、`.eslintrc.json`、`.eslintrc.cjs`。
   
   *.js文件：
 

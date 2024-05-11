@@ -4,6 +4,8 @@ webpack 是一个现代 JavaScript 应用程序的静态模块打包器, 将所�
 
 官网：https://webpack.docschina.org/concepts/
 
+也可以参考：https://developer.aliyun.com/article/891807
+
 ## 1 安装
 
 `npm i webpack -D`
