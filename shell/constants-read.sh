@@ -11,6 +11,7 @@ source ./constants.sh
 # 将日期时间按格式赋值给变量：
 curDate=$(date +'%m-%d')
 
+# 进行比较
 if [ $curDate == $lastModified ]; then
     count=$(expr $count + 1)
 else

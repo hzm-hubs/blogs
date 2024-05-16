@@ -81,6 +81,9 @@
   <p>Using data from %VITE_API_URL%</p>
   ```
 
+  ```vue
+  const curEnv = import.meta.env.VITE_APP_ENV
+  ```
 * React项目
   
   以`REACT_APP__[defineName]`开头，注入项目进程中process.env
