@@ -6,11 +6,11 @@ tar zcf dist.tar.gz dist
 
 echo '压缩成功'
 
-scp -P 1222 dist.tar.gz bonc@10.131.129.2:/data01/data3/front
+scp -P 1222 dist.tar.gz bonc010.130.**.0:/data01/data3/front
 
 echo '代码包上传成功'
 
-ssh bonc@10.131.129.2 -p 1222 "cd /data01/data3/front && tar xvf dist.tar.gz dist && mv dist.tar.gz dist-back.tar.gz"
+ssh bonc010.130.**.0 -p 1222 "cd /data01/data3/front && tar xvf dist.tar.gz dist && mv dist.tar.gz dist-back.tar.gz"
 
 # $? 获取上一步指令执行结果 0 表示成功
 if [ $? -eq 0 ]; then
