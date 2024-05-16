@@ -18,8 +18,8 @@ else
     count=1
 fi
 
-echo $curDate
+# echo $curDate
 
-echo $count
+# echo $count
 
 echo "count=$count\nlastModified='$curDate'" >./constants.sh
