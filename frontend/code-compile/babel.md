@@ -12,7 +12,7 @@ Babel 是一个工具链，主要用于将采用 ECMAScript 2015+ 语法编写�
 
 - .babelrc
   
-- .babelrc.js、.babelrc.json、.babelrc.cjs、.babelrc.*
+- .babelrc.js、.babelrc.json、.babelrc.cjs、.babelrc.* (js、json文件需要使用 module.exports 导出)
 
 - babel.config.js、babel.config.json、babel.config.*
   
@@ -107,16 +107,48 @@ presets 是一组预定义的插件集合，用于指定要在代码转换过程
 
 plugins是数组格式，将插件名以字符格式添加其中即可，如`@babel/plugin-transform-runtime`,但是有些插件需要设置参数项如<font color='red'>legacy、loose</font>
 
-如安装修饰器@语法
-* 1.安装 `@babel/plugin-proposal-decorators` 插件
+* 如安装修饰器@语法
   
-`npm i  @babel/plugin-proposal-decorators -D`
-* 2.在babel配置文件中启用
-```
-{
+  + 1.安装 `npm i @babel/plugin-proposal-decorators -D`
+
+  + 2.在.babelrc 配置文件中启用
+    ```
+    {
+        plugins: [
+            ['@babel/plugin-proposal-decorators',{legacy: true}]
+        ]
+    }
+    ```
+
+* 支持可选链语法
+  
+  + 1.安装插件 `@babel/plugin-transform-optional-chaining`
+  
+  + 2.在.babelrc 配置文件中启用 
+  
+    ```
     plugins: [
-        ['@babel/plugin-proposal-decorators',{legacy: true}]
+      ['@babel/plugin-transform-optional-chaining']
     ]
-}
-```
+    ```
+
   
+### PS：版本差异，babel发展久远，插件依赖之间有捆绑兼容
+
++ babel 6.23 以后 @babel/core 搭配 @babel/preset-env、@babel/plugin-transform-runtime
+
+  ```
+  {
+    presets: ["@babel/preset-env"],
+    plugins: ["@babel/plugin-transform-runtime"]
+  }
+  ```
+
++ babel 6.23 以前 是 babel-core 搭配 babel-preset-env, babel-plugin-transform-runtime（注册使用可以简写）
+
+```
+  {
+    presets: ["env"],
+    plugins: ["transform-runtime"]
+  }
+```
