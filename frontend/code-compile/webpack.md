@@ -30,7 +30,7 @@ module.exports = {
     mode: 'development',
 
     // 打包目标环境, 默认 web，
-    // 对于前端项目，通常使用 target: 'web'，也有 target: 'es2020'、target: ['web', 'es5']；
+    // 对于前端项目，通常使用 target: 'web'，也有 target: 'es2020'、target: 'browserslist'、target: ['web', 'es5']、
     // 而对于后端 Node.js 项目，使用 target: 'node'。
     // 如果你在构建跨平台的 Electron 应用，可能会使用 target: 'electron-main' 和 target: 'electron-renderer'。
     target: 'web'
