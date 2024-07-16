@@ -133,9 +133,10 @@ plugins是数组格式，将插件名以字符格式添加其中即可，如`@ba
     ```
 
   
-### PS：版本差异，babel发展久远，插件依赖之间有捆绑兼容
+### PS：版本差异，babel发展久远，babel@7以后修改了命名，插件依赖之间有捆绑兼容
++ babel-loader@8版本及以上，核心包是使用@babel/core；babel-loader@7及以下则是babel-core ，如 babel-loader@7 会安装 babel-core@6.23.6
 
-+ babel 6.23 以后 @babel/core 搭配 @babel/preset-env、@babel/plugin-transform-runtime
++ @babel/core 搭配 @babel/preset-env、@babel/plugin-transform-runtime
 
   ```
   {
@@ -144,7 +145,7 @@ plugins是数组格式，将插件名以字符格式添加其中即可，如`@ba
   }
   ```
 
-+ babel 6.23 以前 是 babel-core 搭配 babel-preset-env, babel-plugin-transform-runtime（注册使用可以简写）
++ babel-core 搭配 babel-preset-env, babel-plugin-transform-runtime（注册使用可以简写）
 
 ```
   {
