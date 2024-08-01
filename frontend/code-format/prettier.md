@@ -10,7 +10,7 @@
 - 项目根目录下以 JSON 或 YAML 编写的文件.prettierrc
   `.prettierrc.json`、`.prettierrc.yml`、`.prettierrc.yaml`或`.prettierrc.json5`文件
 -  使用导出对象`module.exports`的js文件
-  `.prettierrc.js`、`.prettierrc.cjs`、`prettier.config.js`
+  、`.prettierrc.cjs`、`prettier.config.js`
 - `package.json` 中的 `prettier` 字段
   
 ## 3 `.prettierignore`
@@ -19,6 +19,10 @@
   /node_modules
   /dist
   ```
+## 保存感知
+每次保存代码，会在终端的输出拦下有打出
+![alt text](../assets/prettier1.png)
+
 ## 实际问题
 
 - 1 当项目首次安装prettier后，运行项目会出现提示prettier的相关报错，如:
