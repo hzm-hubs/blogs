@@ -1,0 +1,56 @@
+```
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    # 设置文件上传大小限制
+    client_max_body_size 500M;
+    
+    # 设置保持活动连接的超时时间，减少多次请求的延迟
+    keepalive_timeout 600;
+    # 设置读取客户端请求头部的超时时间
+    client_header_timeout 600;
+    # 设置发送响应超时
+    send_timeout 600s;
+
+    # 设置代理连接超时
+    proxy_connect_timeout 600s;
+    # 设置代理发送请求超时 默认60s 单位s可省略
+    proxy_send_timeout 600s;
+    # 设置代理读取响应超时
+    proxy_read_timeout 600s;
+    
+    # 设置临时文件的最大大小为 200 MB。超过会将其移动到硬盘
+    proxy_max_temp_file_size 200m
+
+    server {
+        listen       80;
+        server_name  localhost;
+
+        location /upload {
+            #  proxy_send_timeout 600s;  # proxy_send_timeout 可在 http/server/location 模块下设置
+            proxy_pass http://backend_server;
+        }
+    }
+
+    # HTTPS server，443 后的ssl是加上ssl证书的配置
+    server {
+        listen       443 ssl;
+        server_name  localhost;
+
+        ssl_certificate      cert.pem;
+        ssl_certificate_key  cert.key;
+
+        ssl_session_cache    shared:SSL:1m;
+        ssl_session_timeout  5m;
+
+        ssl_ciphers  HIGH:!aNULL:!MD5;
+        ssl_prefer_server_ciphers  on;
+
+        location / {
+            root   html;
+            index  index.html index.htm;
+        }
+    }
+}
+```
