@@ -16,8 +16,11 @@ echo "It is a \n test"
 # 显示不换行
 echo "It is a \c test"
 
-# 显示结果定向至文件
+# 将内容覆盖目标文件
 echo "It is a test" > myfile
+
+# 将内容写入目标文件
+echo "It is a test" >> myfile
 
 # 原样输出字符串，不进行转义或取变量(用单引号)
 echo '$name\"'

@@ -22,7 +22,7 @@
     },
 ```
 
-可以任务是在为每个 less 文件预先引入了 
+可以认为是在为每个 less 文件预先引入了 
 <code>
 @import url(@/assets/styles/common.less);
 </code>
