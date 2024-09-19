@@ -14,6 +14,26 @@ window.location.hash='detail'
 ```js
 <a href="#edit">edit</a>
 ```
+需要注意的是在hash模式重定向是在#号之后的操作，注意传参被丢弃
+```js
+// react-router 重定向
+{
+    path: "/",
+    name: "Root",
+    redirect: () => {
+        const temp = new URLSearchParams(window.location.search);
+        const query: any = {};
+        // 保留路径参数
+        for (let [key, value] of temp) {
+            query[key] = value;
+        }
+        // 重定向前修改当前的历史记录
+        window.history.replaceState(null, "", "/");
+        return { path: "/loading", query };
+    },
+}
+```
+
 ### 通过history实现前端路由
 HTML5的History接口，History对象是一个底层接口，不继承于任何的接口。History接口允许我们操作浏览器会话历史记录。
 

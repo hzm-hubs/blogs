@@ -1,3 +1,20 @@
+### 配置自检
+/nginx 目录下时：sbin/nginx -t
+
+### 启动
+/nginx 目录下时：sbin/nginx
+/nginx/sbin 下时 ./nginx
+
+### 状态
+./nginx -s status (好像被舍弃了)
+
+### 停止
+./nginx -s stop
+
+### 重启
+./nginx -s reload
+
+### 基本配置
 ```
 http {
     include       mime.types;
