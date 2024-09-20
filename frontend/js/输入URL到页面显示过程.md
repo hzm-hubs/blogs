@@ -30,7 +30,7 @@ DNS存在着多级缓存，从离浏览器的距离排序的话，有以下几�
 TCP提供一种可靠的传输，这个过程涉及到三次握手，四次挥手。
 
 ### 三次握手
-![img](./img/resolve.png "resolve.png")
+![img](./images/resolve.png "resolve.png")
 - 第一次握手：
 客户端发送syn包(Seq=x)到服务器，并进入SYN_SEND状态，等待服务器确认；
 
@@ -44,7 +44,7 @@ TCP提供一种可靠的传输，这个过程涉及到三次握手，四次挥�
 
 ## 四次挥手
 数据传输完毕后，双方都可释放连接。最开始的时候，客户端和服务器都是处于ESTABLISHED状态，假设客户端主动关闭，服务器被动关闭。
-![img](./img/resolve2.png "resolve2.png")
+![img](./images/resolve2.png "resolve2.png")
 
 - 第一次挥手：
 客户端发送一个FIN，用来关闭客户端到服务器的数据传送，也就是客户端告诉服务器：我已经不 会再给你发数据了(当然，在fin包之前发送出去的数据，如果没有收到对应的ack确认报文，客户端依然会重发这些数据)，但是，此时客户端还可以接受数据。
@@ -77,7 +77,7 @@ FIN=1，其序列号为seq=u（等于前面已经传送过来的数据的最后�
 HTTP报文也分成三段：状态码，响应报头和响应报文。
 
 ## 浏览器解析渲染页面
-![img](./img/resolve3.png "resolve3.png")
+![img](./images/resolve3.png "resolve3.png")
 这个图就是Webkit解析渲染页面的过程。
 
 解析HTML形成DOM树

@@ -2,7 +2,7 @@
 处理 `Promise.rejcet()` 返回一个已被拒绝的 Promise 对象，并将指定的原因作为拒绝的值。如果没有 catch 函数捕获不过可能会报错
 
 - ps：针对`axios`接口统一处理500返回
-```
+```js
 axios.js: 
 // 创建axios实例 process.env.VUE_APP_BASE_API '/base-api'
 const service = axios.create({
@@ -36,7 +36,7 @@ async function getTypes() {
 
 页面中调用时，没有catch去接口被拒绝访问的promise对象，可能会报错。项目开发环境被 `webpack-dev-server` 弹窗提示:
 
-![img](./img/reject.jpg "reject.jpg")
+![img](./images/reject.jpg "reject.jpg")
 
 ### 处理
 

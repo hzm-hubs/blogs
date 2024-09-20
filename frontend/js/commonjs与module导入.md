@@ -118,4 +118,4 @@ num = 10 // 抛出错误
 Module是静态导入，不支持commonjs中的动态导入
 
 ### 总结
-![img](./img/moduleandcommon.png)
+![img](./images/moduleandcommon.png)
