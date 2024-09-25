@@ -19,4 +19,15 @@ html：
  ```
 网页显示：
 
-![alt text](./images/imitate-json.png)
+换行符空格和制表符文字换行行尾空格normal合并合并换行删除nowrap合并合并不
+换行删除pre保留保留不换行保留pre-wrap保留保留换行挂起pre-line保留合并换行删除break-spaces保留保留换行换行
+
+```js
+{ 
+  code:200,
+  data: {
+    name:'dongfangkefu'
+  },
+  msg:'success!'
+}
+```
