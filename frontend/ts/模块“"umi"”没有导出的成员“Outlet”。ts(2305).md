@@ -2,4 +2,7 @@
 
 ![alt text](./images/types.png)
 
-需要安装umijs的types解析组件
+当前 umi 没有类型定义的 types 库，可以用 declare module 添加声明
+```
+declare module 'umi'
+```
