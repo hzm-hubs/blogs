@@ -99,6 +99,10 @@ console.log(msg) // { msg: "蛙人" }
 import { default as all,  name, age } from './index.js'
 console.log(all) // { msg: "蛙人" }
 ```
+- 导出、引入一起写，在 TypeScript (.ts 或 .tsx 文件) 中，不支持直接导出和引入外部链接。
+```js
+export * from '/common.js'
+```
 - 导入值的变化
   
 导出的值是值的引用，并且内部有映射关系，这是export关键字的作用。而且导入的值，不能进行修改也就是只读状态。
