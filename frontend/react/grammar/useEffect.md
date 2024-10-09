@@ -25,13 +25,19 @@ useEffect(() => {
 useEffect(() => {
 });
 ```
-useEffect 还可以通过 return 接受一个回调，再销毁时执行
+useEffect 还可以通过 return 接受一个回调，在页面/组件销毁时执行，
 ```js
 useEffect(() => {
     return () => {
         // 回调    
     }
 });
+// 首次执行函数也支持 注意不要直接return函数，会直接执行的
+useEffect(() => {
+    return () => {
+        // 回调    
+    }
+}, []);
 ```
 问题
 1.useEffect中监听到变量并调取接口，调取接口的方法使用了lodash中的防抖，但是变量更新几次，接口也会执行几次。是因为useEffect特性吗，每次都刷新了页面吗？
