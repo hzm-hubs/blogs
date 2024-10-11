@@ -30,4 +30,17 @@
   `Line 16:9:  Delete `⏎↹↹↹↹⏎↹↹↹`  prettier/prettier`
 
   应该是首次安prettier后，应是其检测到项目中有代码格式不符合配置规则，按照报错提示到目标文件修改、若编辑器设置了保存自动格式文件代码可直接在该页面<font color='red'>保存</font>操作
-  
+
+## 拓展插件
+
+"prettier-plugin-organize-imports" 保存代码时自动删除已声明但从未读取其值的变量
+```
+{
+  "printWidth": 80,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "proseWrap": "never",
+  "overrides": [{ "files": ".prettierrc", "options": { "parser": "json" } }],
+  "plugins": ["prettier-plugin-organize-imports", "prettier-plugin-packagejson"]
+}
+```
