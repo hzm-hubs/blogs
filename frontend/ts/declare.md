@@ -60,6 +60,7 @@ declare module '*.png' {
     const src: string; 
     export default src;
 }
+// 声明导出 umi
 declare module 'umi'
 ```
 - 命名空间
