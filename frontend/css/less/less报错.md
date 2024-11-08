@@ -1,9 +1,9 @@
 ### missing semi-colon or unrecognised media features on import
 
-![alt text](./img/lesserror.png)
 
+注意：@import "${path.resolve(__dirname, 'src/assets/css/global.less')}";中的`""`和结尾处的`;`不能省略，否则会报错：# missing semi-colon or unrecognised media features on import
 
-注意：@import "${path.resolve(__dirname, 'src/assets/css/global.less')}";结尾处的;不能省略，否则会报错：# missing semi-colon or unrecognised media features on import
+// `less-loader`4版本及以上是使用`additionalData`，而非旧版的`modifyVars`
 
 ```js
     css: {
