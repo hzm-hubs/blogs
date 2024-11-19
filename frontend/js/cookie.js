@@ -33,7 +33,6 @@ export const removeCookie = (name = "") => {
 		cookies = cookies.split("; ");
 		for (let i = 0; i < cookies.length; i++) {
 			if (cookies[i].includes(`${name}=`)) {
-				console.log("清除", name, JSON.stringify(document.cookie));
 				document.cookie = `${encodeURIComponent(
 					name
 				)}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; max-age=-1; path=/;`;
