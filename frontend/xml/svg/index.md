@@ -49,7 +49,7 @@
 参考链接：https://juejin.cn/post/6918723151732391950
 
 svg-sprite-loader，svgo-loader
-```html
+```xml
 <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <style>
     .classA { fill:red }
