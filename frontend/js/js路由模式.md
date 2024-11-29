@@ -27,6 +27,7 @@ window.location.hash='detail'
         for (let [key, value] of temp) {
             query[key] = value;
         }
+        // 也可以通过 query.has(keyName)、query.get(keyName) 获取具体参数值
         // 重定向前修改当前的历史记录
         window.history.replaceState(null, "", "/");
         return { path: "/loading", query };
