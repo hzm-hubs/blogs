@@ -63,3 +63,5 @@ router.get("/eventsource/back", (ctx, next) => {
     });
 });
 ```
+
+参考链接：https://www.cnblogs.com/Wayou/p/koa_transfer_encoding_chunked.html
