@@ -64,4 +64,69 @@ router.get("/eventsource/back", (ctx, next) => {
 });
 ```
 
+// 客户端模拟接入
+```js
+const simulateOutput2 = async (question: string) => {
+    const response = await fetch('/localServer/api/eventsource', {
+      method: 'GET',
+      headers: {
+        Accept: 'text/event-stream',
+        'content-type': 'application/json',
+        'blade-auth': `${getCookie('tokenType')} ${getCookie('accessToken')}`,
+      },
+      // body: JSON.stringify({
+      //   botId: props.botId,
+      //   question,
+      // }),
+    });
+    if (!response.body) {
+      throw new Error('ReadableStream not supported in this browser');
+    }
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder('utf-8');
+    let buffer = '';
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      console.log('buffer', buffer);
+      // 处理完整的消息
+      let boundary;
+      let index = 0;
+      while ((boundary = buffer.indexOf('\n\n')) !== -1) {
+        const chunk = buffer.slice(0, boundary); // 截取一条完整的没有\n\n消息
+        buffer = buffer.slice(boundary + 2); // 剩下的内容
+        let tempData: any = '';
+        // console.log('tempData', tempData, typeof tempData);
+        if (chunk.trim()?.startsWith('data:')) {
+          tempData = strJson(chunk.trim().split('data:')[1]);
+        } else {
+          tempData = strJson(chunk.trim());
+        }
+        if (tempData) {
+          setTimeout(() => {
+            setCurResponse(tempData?.content || '');
+          }, index * 50);
+        }
+        index++;
+      }
+    }
+};
+
+// 使用副作用，更新到页面
+useEffect(() => {
+    console.log('curResponse 变化', curResponse);
+    setMessage((prevMessage) => {
+      const updatedMessages = [...prevMessage];
+      updatedMessages[updatedMessages.length - 1] = {
+        ...updatedMessages[updatedMessages.length - 1],
+        content:
+          updatedMessages[updatedMessages.length - 1].content + curResponse,
+        status: curResponse ? 'incomplete' : 'complete',
+      };
+      return updatedMessages;
+    });
+}, [curResponse])
+```
+
 参考链接：https://www.cnblogs.com/Wayou/p/koa_transfer_encoding_chunked.html
