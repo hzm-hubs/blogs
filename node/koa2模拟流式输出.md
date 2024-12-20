@@ -67,6 +67,7 @@ router.get("/eventsource/back", (ctx, next) => {
 // 客户端模拟接入
 ```js
 const simulateOutput2 = async (question: string) => {
+    // 注意使用项目代理可能会因为其框架配置导致数据全量返回 如 umi4
     const response = await fetch('/localServer/api/eventsource', {
       method: 'GET',
       headers: {
