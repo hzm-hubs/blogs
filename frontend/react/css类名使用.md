@@ -39,3 +39,8 @@ import './index.less';
 // 使用
 <div className="less"></div>
 ```
+
+### 坏处
+会导致类名重复注入
+
+![alt text](./images/namerepeats.png)
