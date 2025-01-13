@@ -2,7 +2,7 @@
 
 接口提供了监视对 DOM 树所做更改的能力
 
-```
+```js
 // 选择需要观察变动的节点
 const targetNode = document.getElementById("some-id");
 
@@ -29,4 +29,28 @@ observer.observe(targetNode, config);
 
 // 之后，可停止观察
 observer.disconnect();
+```
+
+在react中useEffect中使用时，注意同时操作删除节点和加入节点，会走进死循环，，如果存在这种情况可以先停止监听，DOM
+操作完毕后再进行监听
+```js
+useEffect(() => {
+  const targetNode = document.getElementById("some-id");
+  const config = { attributes: true, childList: true, subtree: true };
+  const callback = function (mutationsList, observer) {
+    observer.disconnect();
+    for (let mutation of mutationsList) {
+      if (mutation.type === "childList") {
+        console.log("A child node has been added or removed.");
+      } else if (mutation.type === "attributes") {
+        console.log("The " + mutation.attributeName + " attribute was modified.");
+      }
+    }
+    observer.observe(targetNode, config);
+  };
+  
+  observer.observe(targetNode, config);
+  
+  return observer.disconnect();
+},[prop])
 ```
