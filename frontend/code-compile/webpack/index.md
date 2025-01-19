@@ -51,15 +51,16 @@ module.exports = {
         rules: [
             { test: /\.css$/, use: 'css-loader' },
             { test: /\.ts$/, use: 'ts-loader' },
+            { test: /\.jsx$/, use: 'babel-loader' ,exclude:'node_modules',options: {
+                presets: ["@babel/preset-env"]
+            }},
         ],
     }
 
-    // plugin 插件目的在于解决 loader 无法实现的其他事
+    // plugin  插件是一个具有 apply 方法的 JavaScript 对象。apply 方法会被 webpack compiler 调用，并且在 整个 编译生命周期都可以访问 compiler 对象。目的在于解决 loader 无法实现的其他事。
     plugins: [
         new webpack.ProgressPlugin(),
         new HtmlWebpackPlugin({ template: './src/index.html' }),
     ],
 };
 ```
-
-PS: webpack 可以通过 `babel-loader` 使用 Babel
