@@ -72,7 +72,7 @@ export default HomeIcon;
 ```
 自动导入所有 SVG 图标
 
-可以使用 require.context 自动导入所有 SVG 文件：
+可以使用 require.context（是 Webpack 提供的一个特殊功能，用于在编译时动态加载模块， 普遍用于批量导入文件、自动化注册组件或模块、按需加载资源） 自动导入所有 SVG 文件：
 
 ```javascript
 const requireAll = (requireContext) => requireContext.keys().map(requireContext);
