@@ -1,5 +1,6 @@
 // nodejs 递归遍历文件夹下文件内容，用于代码背书等
-// eg: node loopread.js 目标文件夹 result.txt
+// 使用方法：node loopread.js 目标文件夹 输出文件
+// eg: node loopread.js ./src/ result.txt
 const fs = require("fs");
 const path = require("path");
 const source = process.argv[2];
