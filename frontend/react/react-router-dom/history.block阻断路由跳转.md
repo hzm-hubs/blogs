@@ -9,7 +9,7 @@ history.block 接收一个函数作为参数，该函数可以返回以下值：
 3. true：允许路由跳转。
 
 示例代码
-```javascript
+```jsx
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -43,7 +43,7 @@ history.block 返回一个函数（unblock），调用该函数可以取消拦�
 除了显示默认的确认对话框，你还可以自定义拦截逻辑。例如，根据条件决定是否阻止跳转。
 
 示例代码
-```javascript
+```jsx
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -80,7 +80,7 @@ function MyComponent() {
 
 如果用户确认离开，返回 true 允许跳转；否则返回 false 阻止跳转。
 
-## history.block 的参数
+## 自定义拦截时 history.block 的参数
 
 history.block 的回调函数接收两个参数：
 
@@ -105,7 +105,8 @@ history.block((location, action) => {
 
 兼容性：history.block 依赖于 history 对象，确保使用的 react-router-dom 版本支持该功能。
 
-## 自测
+自测
+
 ```js
   const [isEdit,setIsEdit] = useState(false)
   const [nextUrl,setNextUrl] = useState('')
@@ -173,6 +174,167 @@ history.block((location, action) => {
   );
 ```
 
-### 总结
-history.block 是 react-router-dom 提供的一个强大功能，用于拦截路由跳转并执行自定义逻辑。通过合理使用，可以有效防止用户意外离开页面或丢失未保存的数据。
+也可以不使用延时器，通过 useEffect 副作用出发跳转
+
+```js
+  const [isEdit,setIsEdit] = useState(false)
+  const [nextUrl,setNextUrl] = useState('')
+
+  useEffect(() => {
+    if (!isEdit && nextUrl) {
+      history.push(nextUrl);
+    }
+  }, [isEdit]);
+
+  useEffect(() => {
+    const unblock = history.block(({ location }: any) => {
+      if (isEdit) {
+        // 自定义逻辑
+        setNextUrl(location.pathname);
+        setVisible(true);
+      } else {
+        unblock();
+        history.push(location.pathname);
+      }
+    });
+
+    return () => {
+      unblock();
+    };
+  }, [history, isEdit]);
+
+  // 弹窗操作方法
+    const footer = (
+    <div className="modal-footer">
+      <div className="footer-btns">
+        <Button
+          className="cancel-btn"
+          onClick={() => {
+            setIsEdit(false); // 设置为false
+          }}
+        >
+          不保存
+        </Button>
+        <Button
+          className="cancel-btn"
+          onClick={() => {
+            setVisible(false);
+          }}
+        >
+          取消
+        </Button>
+        <Button
+          theme="solid"
+          type="primary"
+          onClick={() => {
+            if (isEdit) {
+                doUpdate(data, () => {
+                    setIsEdit(false);
+                });
+            } else {
+              doUpdate(data); // 更新方法
+            }
+          }}
+        >
+          保存
+        </Button>
+      </div>
+    </div>
+  );
+```
+
+## history.replace(path) 👉 替换 当前历史记录，不会触发 history.block()，因为它没有真正改变历史记录的长度。
+
+1. 手动封装 history.replace
+
+```jsx
+import { createBrowserHistory } from "history";
+
+const history = createBrowserHistory();
+let isBlocked = false;
+
+const blockNavigation = (message) => {
+    isBlocked = true;
+    history.block(message);
+};
+
+const customReplace = (path) => {
+    if (isBlocked) {
+        const confirmLeave = window.confirm("你确定要离开当前页面吗？");
+        if (!confirmLeave) return;
+    }
+    history.replace(path);
+};
+
+// 让 `history.replace` 变成可拦截的
+history.customReplace = customReplace;
+
+export { history, blockNavigation };
+```
+使用
+```jsx
+import { history, blockNavigation } from "./history";
+
+blockNavigation("确定要离开吗？");
+
+// 调用 customReplace，而不是 history.replace
+history.customReplace("/new-page");
+
+```
+2. 在 useEffect 监听 URL 变化
+
+如果你使用的是 react-router-dom v6（不再暴露 history.block()），可以用 useEffect 监听 location 变化：
+
+```jsx
+import { useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+
+const useBlockNavigation = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        const unblock = () => {
+            const confirmLeave = window.confirm("确定要离开当前页面吗？");
+            return confirmLeave;
+        };
+
+        const handleBeforeUnload = (event) => {
+            if (!unblock()) {
+                event.preventDefault();
+                event.returnValue = "";
+            }
+        };
+
+        window.addEventListener("beforeunload", handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener("beforeunload", handleBeforeUnload);
+        };
+    }, [location]);
+};
+
+export default useBlockNavigation;
+
+```
+在组件中使用：
+
+```jsx
+import useBlockNavigation from "./useBlockNavigation";
+
+const MyComponent = () => {
+    useBlockNavigation();
+    return <div>页面内容</div>;
+};
+
+```
+
+这个方法适用于 react-router-dom v6，但只会在 用户刷新或关闭页面 时生效。
+
+## 总结
+- history.block 是 react-router-dom 提供的一个强大功能，用于拦截路由跳转并执行自定义逻辑。通过合理使用，可以有效防止用户意外离开页面或丢失未保存的数据。
+
+- history.push(path) 👉 添加 一个新记录到 history 栈，可以被 history.block() 拦截。
+
+- history.replace(path) 👉 替换 当前历史记录，不会触发 history.block()，因为它没有真正改变历史记录的长度。
 
