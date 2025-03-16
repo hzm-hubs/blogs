@@ -63,6 +63,36 @@ setCount(prev => prev + 1); // 基于最新的 1 更新为 2
 
 `setState(prev => prev + 1);`
 
+注意：useState 的状态更新是异步的，这可能导致在三个及以上组件通过中间组件相互更新变量时，获取到的变量值不一样，
+
+```jsx
+    export default () => {
+        const [isEdit,setIsEdit] = useState(false)
+
+        return (<>
+          <ConfirmSave checkEdit={() => isEdit}></ConfirmS>
+            <BasicInfo
+            ref={baseRef}
+            fromPage="setting"
+            kdbInfo={kdbInfo}
+            btnText="确认"
+            loading={loading}
+            editCallBack={(data) => {
+                setIsEdit(data)
+            }}
+            callBack={(data: kdbBaseInfo) => {
+                doUpdate(data);
+            }}
+            ></BasicInfo>  
+        </>)
+    }
+```
+如上，在 editCallBack 函数中，当设置 setEdit(data) 后，立即在 ConfirmSave 组件中检查 checkEdit 值时可能还是旧值。
+
+这是可以用通过useEffect方法主动触发更新，或是通过ref方法更新
+
+
+
 ### 总结
 两者执行逻辑不同：
 

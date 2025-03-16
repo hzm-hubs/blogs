@@ -38,6 +38,12 @@ useEffect(() => {
         // 回调    
     }
 }, []);
+
+useEffect(() => {
+  console.log("Effect ran");
+}, [time]);
+// 在组件首次渲染时，useEffect 中的副作用会执行。
+// 如果 time 后续发生变化，useEffect 会再次执行。
 ```
 问题
 1.useEffect中监听到变量并调取接口，调取接口的方法使用了lodash中的防抖，但是变量更新几次，接口也会执行几次。是因为useEffect特性吗，每次都刷新了页面吗？
