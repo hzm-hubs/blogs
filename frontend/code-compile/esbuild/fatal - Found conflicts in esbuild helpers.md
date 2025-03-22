@@ -25,7 +25,7 @@ export default defineConfig({
 ```sh
 npm run dev
 ```
-2. 检查 Git 是否有未解决的冲突
+1. 检查 Git 是否有未解决的冲突
 
 执行：
 ```sh
@@ -86,4 +86,21 @@ npm install
 ```sh
 npm rebuild esbuild
 npm run dev
+```
+
+如果终端提示是插件之间问题
+
+```
+Found conflicts in esbuild helpers: Xe (vendors-node_modules_pnpm_dnd-kit_modifiers_9_0_0__dnd-kit_core_6_3_1_react-dom_18_3_1_react_-b68d19.d227d24f.async.js, vendors-node_modules_pnpm_douyinfe_semi-icons_2_72_0_react_18_3_1_node_modules_douyinfe_semi--a15e7b.76d74ea8.async.js)
+```
+
+可能是插件下的依赖之间版本不同引起的，
+
+解决方法
+
+1.在packagejson文件中设置固定的 esbuild 版本，或是在配置文件中开启 esbuildMinifyIIFE
+
+2.删除本地依赖和lock文件，重新安装依赖运行打包脚本
+```
+rm -rf node_modules dist pnpm-lock.yaml 
 ```
