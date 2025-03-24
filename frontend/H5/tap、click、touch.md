@@ -34,5 +34,6 @@ e.preventDefault();//阻止“默认行为”
 ```
 ## 五：touch事件
 touch是针对触屏手机上的触摸事件。现金大多数触屏手机webkit内核提供了touch事件的监听
-包含：touchstart touchmove touchend touchcancel四个事件
-touchstart touchmove touchend事件可以类比于mousedown mouseover mouseup的触发，也可以使用 touchstart touchmove touchend 模拟 tap 事件
+
+包含：touchstart、touchmove、touchend、touchcancel四个事件
+touchstart、touchmove、touchend事件可以类比于mousedown、mouseover、mouseup的触发，也可以使用touchstart、touchmove 、touchend 模拟 tap 事件
