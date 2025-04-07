@@ -17,7 +17,7 @@
 在 Nginx 中，proxy_pass 是用于代理请求的指令。当你使用 proxy_pass 将请求代理到另一个服务器时，默认情况下，请求路径会被传递给目标服务器，但是其行为也可以根据配置的不同发生变化。
 
 proxy_pass 的行为
-1. 基本路径传递
+1. 基本路径传递(存在尾斜杠)
 假设你有以下 Nginx 配置：
 ```
 location /api/ {
@@ -26,7 +26,7 @@ location /api/ {
 ```
 当你访问 http://your-nginx-server/api/users 时，Nginx 会将请求代理到 http://backend/users，并去除了 /api/ 前缀。这是因为 Nginx 的 proxy_pass 默认情况下会根据 location 块中的路径匹配部分进行去除。
 
-2. 保留路径
+2. 保留匹配路径（没有尾斜杠）
 如果你想将路径保持不变而传递到目标服务器，你可以使用不带尾随斜杠的 proxy_pass：
 ```
 location /api/ {
@@ -35,26 +35,24 @@ location /api/ {
 ```
 在这个例子中，Nginx 将会代理请求到 http://backend/api/users，即保持了 /api/ 路径不变。访问 http://your-nginx-server/api/users 会代理到 http://backend/api/users。
 
-3. 带尾部斜杠的 proxy_pass
-当 proxy_pass 末尾带有斜杠时，Nginx 会去除 location 中匹配的部分并将余下的路径传递给目标服务器。比如：
 
-```
-location /api/ {
-    proxy_pass http://backend/;
-}
-```
-访问 http://your-nginx-server/api/users 将会代理到 http://backend/users，去掉了 /api/ 前缀。
-
-4. 去掉路径的配置
+3. 使用 rewrite 去掉路径的配置  
 如果你希望完全忽略路径，而直接将请求发送到目标地址，可以使用：
-
 ```
 location /api/ {
     proxy_pass http://backend;
     rewrite ^/api(.*) $1 break;
 }
 ```
-这会将 /api 的路径部分去掉，并将请求的余下部分代理到目标服务器。例如，访问 http://your-nginx-server/api/users 会被重写为 http://backend/users。
+这会将 /api 的路径部分去掉，并将请求的余下部分代理（$1）到目标服务器。例如，访问 http://your-nginx-server/api/users 会被重写为 http://backend/users， 类似第 proxy_pass 带斜杠的情况。
+
+rewrite 后缀参数情况：
+|**Flag**|**描述**|
+|--|--|
+|last|	停止处理当前 rewrite 规则，用新 URI 重新匹配 location|
+|break|	停止处理当前 rewrite 规则，继续处理后续非 rewrite 指令|
+|redirect|	返回 302 临时重定向（如果 replacement 不以 http:// 或 https:// 开头）|
+|permanent|	返回 301 永久重定向|
 
 总结
 

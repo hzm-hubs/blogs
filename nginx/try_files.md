@@ -16,14 +16,19 @@ final_action: 如果所有路径都不存在，执行的最终动作，比如返
 ```nginx
 location / {
     root /var/www/html;
-    try_files $uri $uri/ /default.html;
+    try_files $uri $uri/ /index.html;
+    # 也可以使用 rewrite
+    # rewrite ^.*$ /index.html last;
 }
 ```
 $uri: 请求的 URI 对应的文件。
 
 
 $uri/: 如果请求的是目录，查找该目录中的文件。
-/default.html: 如果前面两个都没有找到，则返回 default.html。
+
+/index.html: 如果前面两个都没有找到，则返回 index.html。
+
+避免过度使用 rewrite，特别是在高流量环境中
 
 #### 2.用于单页面应用程序 (SPA)
 在处理 Vue.js 或 React 这样的单页面应用时，前端路由依赖于浏览器的 History API，所以需要让所有的路由都映射到一个 index.html 文件：
