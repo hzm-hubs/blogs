@@ -49,37 +49,43 @@ fr 单位：表示剩余空间的分配比例。
 
 repeat() 函数：用于重复定义轨道。
 
+1) 设置固定列数
+
 ```css
 grid-template-columns: repeat(3, 1fr); /* 3 列，每列宽度相等 */
 ```
 
-自适应换行
+2) 自适应换行
 
-1) repeat 函数结合 auto-fit 或 auto-fill 可以创建自适应的网格布局。
+repeat 函数结合 auto-fit 或 auto-fill 可以创建自适应的网格布局。
+
+|**模式**|**行为**|**适用场景**|
+|--|--|--|
+|auto-fill|尽可能多地创建轨道（即使轨道为空），用空白填充剩余空间|需要固定列宽+自适应列数
+|auto-fit|自动折叠空轨道，将剩余空间分配给已有内容|需要内容撑满容器+消除空白|
+|minmax()组合|动态范围约束（如 minmax(200px, 1fr)）|响应式布局|
 
 
 ```css
 .container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 10px;
+  gap: 10px; /* 设置网格项之间的间距。*/
 }
-repeat(auto-fit, minmax(200px, 1fr))：
+```
+repeat(auto-fit, minmax(200px, 1fr))：中，auto-fit：自动调整列数，尽可能填充可用空间。minmax(200px, 1fr)：每列的最小宽度为 200px，最大宽度为 1fr（等分剩余空间）。
+
+效果：当容器宽度足够时，网格项会排满一行。当容器宽度不足时，网格项会自动换行。
+
+混合使用示例: 左侧固定 200px + 中间自适应列 + 右侧固定 100px
+```csss
+.container {
+  grid-template-columns: 
+    200px repeat(auto-fit, minmax(150px, 1fr)) 100px;
+}
 ```
 
-auto-fit：自动调整列数，尽可能填充可用空间。
-
-minmax(200px, 1fr)：每列的最小宽度为 200px，最大宽度为 1fr（等分剩余空间）。
-
-gap: 10px：设置网格项之间的间距。
-
-效果
-
-当容器宽度足够时，网格项会排满一行。
-
-当容器宽度不足时，网格项会自动换行。
-
-2) 使用 grid-auto-flow 控制换行方向
+3) 使用 grid-auto-flow 控制换行方向
 
 grid-auto-flow 属性可以控制网格项的排列方式。
 
@@ -92,16 +98,11 @@ grid-auto-flow 属性可以控制网格项的排列方式。
 }
 grid-auto-flow: row dense：
 ```
+row：按行排列。 dense：尽可能填满空白区域。
 
-row：按行排列。
+效果：
 
-dense：尽可能填满空白区域。
-
-效果
-
-网格项会按行排列，如果某一行空间不足，会自动换行。
-
-dense 会尝试填充空白区域，避免出现空洞。
+网格项会按行排列，如果某一行空间不足，会自动换行。dense 会尝试填充空白区域，避免出现空洞。
 
 2.2 网格间距
 
