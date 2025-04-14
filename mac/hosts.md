@@ -1,0 +1,1 @@
+hosts地址：/etc/hosts
