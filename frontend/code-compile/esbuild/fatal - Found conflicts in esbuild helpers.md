@@ -39,11 +39,9 @@ both modified:   src/components/CustomChat/index.ts
 说明代码合并未完全解决，需要手动检查 CustomChat/index.ts 文件，确保没有遗留的 Git 冲突标记：
 
 ```ts
-<<<<<<< HEAD
 // 代码 A
-=======
+===
  // 代码 B
->>>>>>> branch_name
 ```
 解决后，提交：
 
