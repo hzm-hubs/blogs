@@ -13,7 +13,7 @@ openssl req -x509 -newkey rsa:4096 -keyout private-key.pem -out cert.pem -days 3
 - -nodes 选项，表示不加密私钥，因此无需输入密码。
 - 请替换 /CN=YourDomain 中的 YourDomain 为你的域名或标识。
 
-生成后，可在目标文件夹下执行 `openssl x509 -in cert.pem -text -noout` 验证
+生成后，可在目标文件夹下执行 `openssl x509 -in cert.pem -text -noout` 验证,正确结果如下：
 ```
 Certificate:
     Data:
@@ -70,3 +70,15 @@ server {
 ```
 127.0.0.1   your-domain.com
 ```
+
+但是偶尔在VPN开启下设置hosts，还是会有打不开问题。如下开启代理访问失败
+
+![alt text](./images/proxy_1.png)
+
+可能是VPN或者代理影响，请关闭后再次尝试
+
+![alt text](./images/proxy_2.png)
+
+如果设置了host时，也可以直接浏览器访问域名+端口，如果本地node启动的7001端口，可以不使用nginx直接访问
+
+![alt text](./images/proxy_3.png)
