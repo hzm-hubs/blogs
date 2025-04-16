@@ -12,7 +12,26 @@ openssl req -x509 -newkey rsa:4096 -keyout private-key.pem -out cert.pem -days 3
 - -subj 选项允许你通过命令行直接提供证书主题信息，而不必在交互式提示中输入。 
 - -nodes 选项，表示不加密私钥，因此无需输入密码。
 - 请替换 /CN=YourDomain 中的 YourDomain 为你的域名或标识。
-  
+
+生成后，可在目标文件夹下执行 `openssl x509 -in cert.pem -text -noout` 验证
+```
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            4d:20:0d:ba:3f:88:b0:97:3d:71:a3:ca:b4:67:ba:f5:eb:59:67:20
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: CN = localkoko.com
+        Validity
+            Not Before: Apr 16 06:37:18 2025 GMT
+            Not After : Apr 16 06:37:18 2026 GMT
+        Subject: CN = localkoko.com
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (4096 bit)
+        ……
+```
+
 ### 2.使用
 
 1）nginx
