@@ -1,4 +1,5 @@
 ### 1.通过 openssl 命令自签证书
+进入目标文件夹
 ```
 openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365
 ```
@@ -42,6 +43,8 @@ server {
 
 - Windows: C:\Windows\System32\drivers\etc\hosts
 - Linux/Mac: /etc/hosts
+
+注意首次设置的签证域名，访问成功可能会有延时
   
 在文件中添加一行类似于以下内容，如果有vpn代理，请取网络设置中的网页代理或是将your-domain.com添入忽略主机与域的表单中
 
