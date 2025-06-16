@@ -20,7 +20,10 @@ netstat -e 显示扩展信息，例如uid等
 netstat -s 按各个协议进行统计
 netstat -c 每隔一个固定时间，执行该netstat命令。
 ```
+常用 netstat -tulnp
+
 losf：（列出打开文件lists openfiles）能看到pid和用户(有权限控制，只能看到本用户)，可以找到哪个进程占用了这个端口
+(可能需要自己安装命令)
 ```
 lsof `which httpd` //那个进程在使用apache的可执行文件
 lsof /etc/passwd //那个进程在占用/etc/passwd
