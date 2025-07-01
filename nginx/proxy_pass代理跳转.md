@@ -54,6 +54,7 @@ rewrite 后缀参数情况：
 |redirect|	返回 302 临时重定向（如果 replacement 不以 http:// 或 https:// 开头）|
 |permanent|	返回 301 永久重定向|
 
+
 总结
 
 带斜杠的 proxy_pass：默认会去掉 location 中的匹配路径。
@@ -64,6 +65,12 @@ rewrite 后缀参数情况：
 
 路径的传递行为取决于 proxy_pass 的配置方式，所以在配置时要根据需要决定是否保留路径、去掉路径前缀或自定义处理路径。
 
+|**location 路径结尾**|**proxy_pass 目标结尾**|**代理行为**|**示例请求（请求 /api/user）**｜
+|--|--|--|--|
+|有/|有/|去除 location 匹配部分，将剩余路径拼接到 proxy_pass |http://backend/user|
+|有/|无/|将完整原始路径（包括 location 匹配部分）追加到 proxy_pass 后 |http://backend/api/user|
+|无/|有/|将 location 匹配后的剩余路径拼接到 proxy_pass，但可能产生双斜杠 |http://backend//user（需用 rewrite 修正）|
+|无/|无/|将完整原始路径追加到 proxy_pass 后，可能造成路径错误 |http://backendapi/user（错误拼接，可以后端兼容）|
 
 
 
