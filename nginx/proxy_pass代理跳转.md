@@ -16,7 +16,7 @@
 ```
 在 Nginx 中，proxy_pass 是用于代理请求的指令。当你使用 proxy_pass 将请求代理到另一个服务器时，默认情况下，请求路径会被传递给目标服务器，但是其行为也可以根据配置的不同发生变化。
 
-proxy_pass 的行为
+### proxy_pass 的行为
 1. 基本路径传递(存在尾斜杠)
 假设你有以下 Nginx 配置：
 ```
@@ -74,3 +74,47 @@ rewrite 后缀参数情况：
 
 
 
+### 常见的一些 proxy_*配置
+
+|**配置项**|**做用说明**|**常用场景/建议**|
+|--|--|--|
+|proxy_pass|	设置后端服务地址（协议+主机+端口+路径）|	必须|
+|proxy_set_header|设置转发到后端时的请求头（如 Host、X-Real-IP、X-Forwarded-For）|	建议加|
+|proxy_redirect|	控制/修改后端返回的 Location 头，默认会自动替换主机名	|建议加 off，除非有特殊需求|
+|proxy_read_timeout	|设置后端响应超时时间（秒）|	长轮询、SSE、慢接口建议加大|
+|proxy_connect_timeout|	设置与后端建立连接的超时时间（秒）|	建议加|
+|proxy_send_timeout|	设置向后端发送请求的超时时间（秒）	|建议加|
+|proxy_buffering|	是否启用响应缓冲，默认 on	|SSE/流式接口建议 off|
+|proxy_buffers|	设置缓冲区数量和大小	|大响应体时可调整|
+|proxy_buffer_size|	设置用于读取响应头的缓冲区大小	|大响应头时可调整|
+|proxy_set_body|	设置请求体内容	|特殊场景|
+|proxy_cookie_path/domain|	修改后端返回的 Set-Cookie 路径/域名	|跨域/多域名场景|
+|proxy_http_version|	设置与后端通信的 HTTP 版本	|SSE/WebSocket 建议 1.1|
+|proxy_request_buffering|	控制请求体是否缓冲	|上传大文件建议 off|
+|proxy_intercept_errors|	是否拦截后端错误响应（如 502/504），并用自定义错误页替换	|需要自定义错误页时|
+
+
+
+组合使用 
+```ng
+location /api/ {
+    proxy_pass http://backend_host:port/api/;
+    proxy_set_header Host $host; // 让后端能获取到原始 Host。
+    proxy_set_header X-Real-IP $remote_addr; 让后端能获取到真实客户端。
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_redirect off; // 防止后端 Location 头被 Nginx 自动替换，进入重定向，导致前台请求响应错误。
+
+    proxy_connect_timeout 60s;
+    proxy_read_timeout 120s;
+    proxy_send_timeout 60s; // 根据后端接口响应速度调整，避免 Nginx 过早断开连接
+
+    proxy_cookie_path $uri /some$uri; // 如果后端 Set-Cookie 域名/路径和前端不一致时需要用 proxy_cookie_domain、proxy_cookie_path
+
+    proxy_buffering off;  # 适合 Server-Sent Events（SSE）、WebSocket、流式接口
+    # proxy_buffers 8 16k;
+    # proxy_buffer_size 32k;
+}
+```
+
+[官方文档](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass)
