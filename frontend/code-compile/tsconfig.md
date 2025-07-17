@@ -14,7 +14,7 @@
     "module": "CommonJS", // 生成代码的模板标准
     "outFile": "./app.js", // 将多个相互依赖的文件生成一个文件，可以用在AMD模块中，即开启时应设置"module": "AMD",
     "lib": ["DOM", "ES2015", "ScriptHost", "ES2019.Array"], // TS需要引用的库，即声明文件，es5 默认引用dom、es5、scripthost,如需要使用es的高级版本特性，通常都需要配置，如es8的数组新特性需要引入"ES2019.Array",
-    "allowJS": true, // 允许编译器编译JS，JSX文件
+    "allowJs": true, // 允许编译器编译JS，JSX文件
     "checkJs": true, // 允许在JS文件中报错，通常与allowJS一起使用
     "outDir": "./dist", // 指定输出目录
     "rootDir": "./", // 指定输出文件目录(用于输出)，用于控制输出目录结构
