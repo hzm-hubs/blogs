@@ -28,4 +28,23 @@ const streamDownload = (data = "", fileName = "", callBack: any = null) => {
 	}
 	callBack && callBack();
 };
+
+// a标签模拟点击下载链接，由浏览器直接下载 类似 window.open/location.href
+const goDownload = (reqUrl = "", callBack: any = null) => {
+	if (!reqUrl) {
+		return;
+	}
+	// const file = new Blob([res], { type: "application/octet-stream" });  // 流数据下载
+	const link = document.createElement("a");
+	link.href = reqUrl;
+	link.download = "";
+	link.style.display = "none"; // 隐藏虚拟链接
+	// 此写法兼容可火狐浏览器
+	document.body.appendChild(link);
+	const evt = document.createEvent("MouseEvents");
+	evt.initEvent("click", false, false);
+	link.dispatchEvent(evt);
+	document.body.removeChild(link);
+	callBack && callBack();
+};
 ```
