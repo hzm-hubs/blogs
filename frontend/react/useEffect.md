@@ -66,3 +66,27 @@ useEffect(() => {
         }
     }, [userId]);
 ```
+
+2. 不能在 useEffect 初始函数中使用 useState 直接赋值
+
+因为 react 组件接受到新值会重新渲染，useState 的赋值会影响页面展示或变量值充值
+
+错误写法
+```
+const [count, setCount] = useState(0)
+
+useEffect(() => {
+  const timer = setInterval(() => {
+    setCount(count + 1) // 🚨 这个 count 其实永远是 0
+  }, 1000)
+}, [])
+```
+改正
+```
+useEffect(() => {
+  const timer = setInterval(() => {
+    setCount(prevCount => prevCount + 1); // 永远获取最新值
+  }, 1000);
+  return () => clearInterval(timer);
+}, []);
+```
