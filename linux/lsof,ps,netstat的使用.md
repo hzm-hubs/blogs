@@ -3,6 +3,7 @@
 ▌查看端口占用情况
 ```
 netstat -an | grep 8080
+
 lsof -i:8080
 ```
 区别：
@@ -20,8 +21,12 @@ netstat -e 显示扩展信息，例如uid等
 netstat -s 按各个协议进行统计
 netstat -c 每隔一个固定时间，执行该netstat命令。
 ```
-常用 netstat -tulnp
+常用 
+```
+netstat -tunlep // 查看电脑端口号
 
+netstat -tunlp | grep 4510 // 查看4510端口号情况
+```
 losf：（列出打开文件lists openfiles）能看到pid和用户(有权限控制，只能看到本用户)，可以找到哪个进程占用了这个端口
 (可能需要自己安装命令)
 ```
