@@ -186,6 +186,14 @@ $curl http://www.yahoo.com/login.cgi?user=nickname&password=12345
 POST
 ```
 $curl -d "user=nickname&password=12345" http://www.yahoo.com/login.cgi
+
+// or 
+
+curl -X POST -d "user=nickname&password=12345" http://www.yahoo.com/login.cgi
+
+// or
+
+curl -X POST -H "Content-Type: application/json" -d '{"name":"nickname","password":"12345"}' http://www.yahoo.com/login.cgi
 ```
 
 POST 文件
@@ -217,6 +225,8 @@ $curl -A "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)" -x123.45.67.89:108
 ```
 $curl -A "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)" -x123.45.67.89:1080 -e"mail.yahoo.com" -o page.html -D cookie0001.txt http://mydomain.net
 ```
+
+
 
 高级下载功能
 循环下载
