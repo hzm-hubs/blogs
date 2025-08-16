@@ -12,7 +12,7 @@
 
 ![alt text](./images/image-2.png)
 
-在 `JavaScript` 中，`blur` 事件会在 `click` 事件之前触发(这是由事件冒泡和浏览器的事件处理机制决定的)。上述代码中，输入框与展示文案是互斥展示的，当更改 `item.isEditing` 值，会偶现展示文案值没有更新。这是因为点击 `CheckOutlined` 元素 会优先执行输入框的`blur`事件导致整个 `v-else`区域被销毁，`CheckOutlined`自身的`click`事件不被执行，最终展示成展示文案与选择框值不同步的情况。
+在 `JavaScript` 中，`blur` 事件会在 `click` 事件之前触发(这是由事件冒泡和浏览器的事件处理机制决定的)。上述代码中，输入框与展示文案是互斥展示的，当更改 `item.isEditing` 值，会偶现展示文案值没有更新。这是因为点击 `CheckOutlined` 元素 会优先执行输入框的`blur`事件导致整个 `v-else`区域被销毁，点击事件往下传递找不到目标元素 `CheckOutlined`自身的`click`事件不被执行，最终展示成展示文案与选择框值不同步的情况。
 
 调整代码后，就能同步更新了：
 
