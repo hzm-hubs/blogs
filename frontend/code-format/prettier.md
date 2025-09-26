@@ -30,6 +30,55 @@
   `Line 16:9:  Delete `⏎↹↹↹↹⏎↹↹↹`  prettier/prettier`
 
   应该是首次安prettier后，应是其检测到项目中有代码格式不符合配置规则，按照报错提示到目标文件修改、若编辑器设置了保存自动格式文件代码可直接在该页面<font color='red'>保存</font>操作
+- 2 若安装后，保存文件没有格式化文件，请检查是否配置了浏览器setting
+
+.vscode/setting.json
+```json
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  
+  "editor.formatOnSave": true,
+  
+  "files.autoSave": "onFocusChange",
+  
+  "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[vue]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+  },
+  
+  "eslint.validate": [
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact",
+      "vue"
+  ]
+}
+```
 
 ## 拓展插件
 
