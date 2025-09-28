@@ -14,6 +14,21 @@ for...in 可以遍历对象数据，for...of不行
 const demoObject = {name:'hliuliu'}
 
 for (let i in demoObject) console.log('i',i) // name 输出的key值
-for (let [key，value] in demoObject) console.log(key,value) // name， 'hliuliu'
 for (let i of demoObject) console.log('i',i) // TypeError: Invalid attempt to iterate non-iterable instance.In order to be iterable……
+```
+
+当数据源是二维数组是 可以使用for of 结构赋值
+```js
+const iterable = [
+  ["a", 1],
+  ["b", 2],
+  ["c", 3],
+];
+for (const [key, value] of iterable) {
+  console.log(key,value);
+} 
+// 输出 
+// a 1
+// b 2
+// c 3
 ```

@@ -1,3 +1,4 @@
+vue中 class 简写状态
 ```css
   &-value {
     padding: 4px 8px;

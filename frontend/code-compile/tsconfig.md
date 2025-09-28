@@ -56,6 +56,8 @@
     "rootDirs": ["src", "out"], // 将多个目录放在一个虚拟目录下，用于运行时，即编译后引入文件的位置可能发生变化，这也设置可以虚拟src和out在同一个目录下，不用再去改变路径也不会报错
     "listEmittedFiles": true, // 打印输出文件
     "listFiles": true // 打印编译的文件(包括引用的声明文件)
+    "forceConsistentCasingInFileNames": true, // 强制文件名大小写一致性
+    "allowSyntheticDefaultImports": true, // 允许合成默认导入
 ```
   
 - include: 指定要包含在项目中的文件或文件夹。可以使用通配符（如*）来匹配多个文件。
@@ -73,3 +75,38 @@
 你可以根据自己的项目结构和编译器要求，根据文档指南配置 tsconfig.json 文件。根据项目需要，可以设置目标版本、模块解析方式、输出路径等编译器选项，并指定要包含或排除的文件。
 
 总结起来，tsconfig.json 是用于配置 TypeScript 项目的配置文件。它包含一些常见的配置选项，用于指定编译器选项、包含的文件列表、排除的文件列表等。通过配置 tsconfig.json，你可以使用 TypeScript 编译器的功能，并根据项目需求进行相应的调整。
+
+基础配置实例
+```json
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "lib": ["esnext", "dom", "dom.iterable"],
+        "module": "esnext",
+        "moduleResolution": "node",
+        "baseUrl": "./",
+        "paths": {
+            "@/*": ["src/*"]
+        },
+        "types": ["node"],
+        "noEmit": true,
+        "strict": true,
+        "jsx": "preserve",
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true, 
+        "allowSyntheticDefaultImports": true, 
+        "declaration": true,
+        "sourceMap": true
+    },
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.d.ts",
+        "src/**/*.tsx",
+        "src/**/*.vue",
+        "vite.config.ts"
+    ],
+    // "extends":
+    "exclude": ["node_modules", "dist", "**/*.js"]
+}
+```
