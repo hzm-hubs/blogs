@@ -1,15 +1,51 @@
-# tsconfig.json 
+## tsconfig.json
 
 是用于配置 TypeScript 项目的根目录下的一个配置文件。它主要用于指定 TypeScript 编译器的选项和编译配置。
 
-## 常见的 tsconfig.json 配置选项
+## tsconfig.json 基础配置
+
+示例
+
+```json
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "types": ["node"],
+    "noEmit": true,
+    "strict": true,
+    "jsx": "preserve",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "sourceMap": true
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "vite.config.ts"
+  ],
+  // "extends":
+  "exclude": ["node_modules", "dist", "**/*.js"]
+}
+```
 
 - compilerOptions: 用于指定编译器的选项，例如目标版本、模块解析方式、输出路径等。
 
 ```ts
     "incremental": true, // TS编译器在第一次编译之后会生成一个存储编译信息的文件，第二次编译会在第一次的基础上进行增量编译，可以提高编译的速度
     "tsBuildInfoFile": "./buildFile", // 增量编译文件的存储位置
-    "diagnostics": true, // 打印诊断信息 
+    "diagnostics": true, // 打印诊断信息
     "target": "ES5", // 目标语言的版本
     "module": "CommonJS", // 生成代码的模板标准
     "outFile": "./app.js", // 将多个相互依赖的文件生成一个文件，可以用在AMD模块中，即开启时应设置"module": "AMD",
@@ -26,7 +62,7 @@
     "declarationMap": true, // 为声明文件生成sourceMap
     "typeRoots": [], // 声明文件目录，默认时node_modules/@types
     "types": [], // 加载的声明文件包
-    "removeComments": true, // 删除注释 
+    "removeComments": true, // 删除注释
     "noEmit": true, // 不输出文件,即编译后不会生成任何js文件
     "noEmitOnError": true, // 发送错误时不输出任何文件
     "noEmitHelpers": true, // 不生成helper函数，减小体积，需要额外安装，常配合importHelpers一起使用
@@ -59,54 +95,29 @@
     "forceConsistentCasingInFileNames": true, // 强制文件名大小写一致性
     "allowSyntheticDefaultImports": true, // 允许合成默认导入
 ```
-  
-- include: 指定要包含在项目中的文件或文件夹。可以使用通配符（如*）来匹配多个文件。
-  
+
+- include: 指定要包含在项目中的文件或文件夹。可以使用通配符（如\*）来匹配多个文件。
 - exclude: 指定在项目中排除的文件或文件夹。同样可以使用通配符进行匹配。
-  
 - extends: 可以继承其他配置文件，这样可以减少重复配置。值可以是预设（如"path/to/preset"）或其他配置文件。
-  
 - files: 指定项目中直接包含的文件列表。格式为字符串数组。
-  
-  
+
+## 相关插件
+
+- @types/node:
+  在 ts 文件中解析一些 node 变量，如 `process`,`__dirname`
+
 ## 注意项
-需要注意的是，tsconfig.json 是 TypeScript 项目的核心配置文件。通过配置它，可以控制编译器的行为、代码检查和输出结果。可以根据项目需求进行相应的调整。
 
-你可以根据自己的项目结构和编译器要求，根据文档指南配置 tsconfig.json 文件。根据项目需要，可以设置目标版本、模块解析方式、输出路径等编译器选项，并指定要包含或排除的文件。
+总结起来，tsconfig.json 是用于配置 TypeScript 项目的配置文件。它包含一些常见的配置选项，用于指定编译器选项、包含的文件列表、排除的文件列表等。通过配置 tsconfig.json，你可以使用 TypeScript 编译器的功能，并根据项目需求，可以设置目标版本、模块解析方式、输出路径等编译器选项，并指定要包含或排除的文件。
 
-总结起来，tsconfig.json 是用于配置 TypeScript 项目的配置文件。它包含一些常见的配置选项，用于指定编译器选项、包含的文件列表、排除的文件列表等。通过配置 tsconfig.json，你可以使用 TypeScript 编译器的功能，并根据项目需求进行相应的调整。
+如果是 vue 项目，一般会在 src 目录下生成或添加一个 `shims-vue.d.ts` 文件为 vue 文件统一输出名
 
-基础配置实例
-```json
-{
-    "compilerOptions": {
-        "target": "esnext",
-        "lib": ["esnext", "dom", "dom.iterable"],
-        "module": "esnext",
-        "moduleResolution": "node",
-        "baseUrl": "./",
-        "paths": {
-            "@/*": ["src/*"]
-        },
-        "types": ["node"],
-        "noEmit": true,
-        "strict": true,
-        "jsx": "preserve",
-        "esModuleInterop": true,
-        "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true, 
-        "allowSyntheticDefaultImports": true, 
-        "declaration": true,
-        "sourceMap": true
-    },
-    "include": [
-        "src/**/*.ts",
-        "src/**/*.d.ts",
-        "src/**/*.tsx",
-        "src/**/*.vue",
-        "vite.config.ts"
-    ],
-    // "extends":
-    "exclude": ["node_modules", "dist", "**/*.js"]
+shims-vue.d.ts
+
+```
+declare module "*.vue" {
+    import type { DefineComponent } from "vue";
+    const component: DefineComponent<{}, {}, any>;
+    export default component;
 }
 ```
