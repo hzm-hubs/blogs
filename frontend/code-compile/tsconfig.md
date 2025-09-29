@@ -80,7 +80,7 @@
     "noUnusedParameters": true, // 检查未使用的函数参数(只提示不报错)
     "noFallthroughCasesInSwitch": true, // 防止switch语句贯穿(即如果没有break语句后面不会执行)
     "noImplicitReturns": true, //每个分支都会有返回值
-    "esModuleInterop": true, // 允许export=导出，由import from 导入
+    "esModuleInterop": true, // 允许混合使用 CommonJS 和 ES 模块
     "allowUmdGlobalAccess": true, // 允许在模块中全局变量的方式访问umd模块
     "moduleResolution": "node", // 模块解析策略，ts默认用node的解析策略，即相对的方式导入
     "baseUrl": "./", // 解析非相对模块的基地址，默认是当前目录
@@ -93,7 +93,8 @@
     "listEmittedFiles": true, // 打印输出文件
     "listFiles": true // 打印编译的文件(包括引用的声明文件)
     "forceConsistentCasingInFileNames": true, // 强制文件名大小写一致性
-    "allowSyntheticDefaultImports": true, // 允许合成默认导入
+    "allowSyntheticDefaultImports": true, // 允许从没有默认导出的模块进行默认导入
+
 ```
 
 - include: 指定要包含在项目中的文件或文件夹。可以使用通配符（如\*）来匹配多个文件。
