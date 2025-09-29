@@ -128,21 +128,23 @@
   // 'prettier','plugin:prettier/recommended' 二选一即可，都可以启用 prettier/prettier
   "extends": [
     "eslint:recommended", // eslint 推荐规则:
+    "@typescript-eslint/recommended", // typescript-eslint 推荐规则
     "plugin:vue/vue3-recommended", // Vue3 推荐规则:
     "plugin:prettier/recommended", // 集成Prettier
-    "./.eslintrc-auto-import.json"
+    "./.eslintrc-auto-import.json" // 根据 unplugin-auto-import 生成的 eslint 全局合法变量文件
   ],
   "rules": {
-    "prettier/prettier": "error",
+    "prettier/prettier": "error", // 将不符合 prettier/prettier 的代码以错误跑出
     "vue/no-multiple-template-root": "off",
     "vue/multi-word-component-names": "off", // 允许 vue 组件使用单个单词命名
-    "vue/no-v-html": "off",
-    "no-invalid-this": "off", //
+    "vue/no-v-html": "off", // 允许 v-html 写法
+    "no-invalid-this": "off", // 允许 this 写法
     "@typescript-eslint/no-this-alias": "off"
   }
 }
 ```
 
+以前需要在 `rules` 中声明许多配置选项，现在通过 extends 引入一些推荐集合，如 `eslint:recommended`
 ### rules
 
 格式：`规则ID: 值类型`
@@ -180,3 +182,7 @@
   }
 }
 ```
+
+### 报错提示
+
+项目中代码编写报错会以 `eslint-${规则}` 展示。可以通过报错提示，修改编写格式，或者调整 eslint 配置文件
