@@ -40,6 +40,23 @@ sass-loader用于处理Sass/SCSS样式文件，将其转换为CSS文件。less-l
   ]
 }
 ```
+### image-webpack-loader
+配置压缩图片
+```
+rules: [{
+  test: /\.(gif|png|jpe?g|svg)$/i,
+  use: [
+    'file-loader',
+    {
+      loader: 'image-webpack-loader',
+      options: {
+        bypassOnDebug: true, // webpack@1.x
+        disable: true, // webpack@2.x and newer
+      },
+    },
+  ],
+}]
+
 ### file-loader 和 url-loader
 file-loader用于处理文件资源，将其复制到输出目录并返回文件路径。url-loader类似于file-loader，但可以根据文件大小将文件转换为DataURL，减少HTTP请求次数。配置示例：
 
@@ -56,3 +73,4 @@ file-loader用于处理文件资源，将其复制到输出目录并返回文件
   }
 }
 ```
+

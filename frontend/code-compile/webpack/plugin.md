@@ -29,6 +29,7 @@ compiler hook 的 tap 方法的第一个参数，应该是驼峰式命名的插�
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack'); // 访问内置的插件
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const path = require('path');
 
 module.exports = {
@@ -48,11 +49,20 @@ module.exports = {
   plugins: [
     new webpack.ProgressPlugin(),
     new HtmlWebpackPlugin({ template: './src/index.html' }),
+    new OptimizeCssAssetsPlugin({
+      cssProcessorOptions: {
+        discardComments: {
+          removeAll: true
+        }
+      }
+		})
   ],
 };
 ```
 
-ProgressPlugin 用于自定义编译过程中的进度报告，HtmlWebpackPlugin 将生成一个 HTML 文件，并在其中使用 script 引入一个名为 my-first-webpack.bundle.js 的 JS 文件。
+ProgressPlugin 用于自定义编译过程中的进度报告
+HtmlWebpackPlugin 将生成一个 HTML 文件，并在其中使用 script 引入一个名为 my-first-webpack.bundle.js 的 JS 文件。
+OptimizeCssAssetsPlugin 用于压缩css代码
 
 #### Node API 方式
 
