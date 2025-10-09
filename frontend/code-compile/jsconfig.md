@@ -14,9 +14,8 @@
   
 - files: 指定项目中直接包含的文件列表。格式为字符串数组。
   
-- compilerOptions.baseUrl: 设置基本路径，用于与绝对模块导入解析相关。
+- typeAcquisition: 设置项目中是否需要自动获取类型声明文件，如第三方库
   
-- compilerOptions.paths: 配置模块引用的别名路径映射
   
 ## 注意项
 
