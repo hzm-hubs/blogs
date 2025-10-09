@@ -17,7 +17,7 @@ for (let i in demoObject) console.log('i',i) // name 输出的key值
 for (let i of demoObject) console.log('i',i) // TypeError: Invalid attempt to iterate non-iterable instance.In order to be iterable……
 ```
 
-当数据源是二维数组是 可以使用for of 结构赋值
+PS: 当数据源是二维数组时 可以使用for of 结构赋值
 ```js
 const iterable = [
   ["a", 1],
