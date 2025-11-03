@@ -15,6 +15,7 @@ name属性主要用于描述网页，比如网页的关键词，叙述等。属�
 <meta name="description" content="Study English online">
 ```
 ③、viewport：移动端视口，仅供移动设备使用
+device-width 将布局视口设置为设备宽度，CSS 像素与设备独立像素按 1:1 映射，避免默认 980px 布局导致整体缩小。
 ```
 <meta name="viewport" content="width=device-width, initial-scale=1">
 ```
