@@ -1,80 +1,84 @@
-### pip ：python的包管理工具
+# pip 常用命令速查表
 
-pip是一个以 Python计算机程序语言 写成的 软件包管理系统 ，他可以安装和管理 软件包 （ https://pypi.org/ ） 中找到。，另外不少的软件包也可以在“Python软件包索引”（英语：Python Package Index，PyPI）中找到。
+## 📦 安装与卸载
 
-许多Python的发行版中已经预装了pip （Python 2.7.9 + 或 Python 3.4+ 以上版本都自带 pip 工具。 ， 没有则需要自己安装了）。
+| 命令 | 说明 |
+|------|------|
+| `pip install <包名>` | 安装最新版本的包 |
+| `pip install <包名>==<版本号>` | 安装指定版本 |
+| `pip install <包名>>=<最低版本>` | 安装不低于某版本的包 |
+| `pip install -r requirements.txt` | 批量安装 requirements.txt 中列出的所有包 |
+| `pip install --upgrade <包名>` 或 `-U` | 升级包到最新版本 |
+| `pip uninstall <包名>` | 卸载包（会提示确认） |
+| `pip uninstall -y <包名>` | 卸载包（跳过确认提示） |
 
-查看是否已经安装 pip 可以使用以下命令：
-```
-pip --version
-```
+---
 
-下载安装包使用以下命令：
-```
-pip install some-package-name
-# 指定包版本安装
-pip install package_name==version
-```
-例如我们安装 numpy 包：
-```
-pip install numpy
-# 指定包版本安装
-pip install requests==2.24.0
-```
+## 🔍 查看与搜索
 
-我们也可以轻易地通过以下的命令来移除软件包：
-```
-pip uninstall some-package-name
-```
-例如我们移除 numpy 包：
-```
-pip uninstall numpy
-```
+| 命令 | 说明 |
+|------|------|
+| `pip list` | 列出当前环境所有已安装的包 |
+| `pip list --outdated` | 列出所有可升级的过时包 |
+| `pip list --uptodate` | 列出所有已是最新版本的包 |
+| `pip show <包名>` | 查看已安装包的详细信息（版本、依赖、位置等） |
+| `pip index versions <包名>` | 查看该包在 PyPI 上的所有可用版本 |
+| `pip search <关键词>` | 在 PyPI 上搜索包（注意：PyPI 已限制此功能，可能不可用） |
+| `pip freeze` | 以 requirements 格式列出已安装包（常用于生成依赖文件） |
 
-如果要查看我们已经安装的软件包，可以使用以下命令：
-```
-pip list
-```
+---
 
-pip 更新插件
-```
-pip install --upgrade package-name
+## 📝 依赖管理
 
-# 升级pip例外
-python3 -m pip install --upgrade pip
+| 命令 | 说明 |
+|------|------|
+| `pip freeze > requirements.txt` | 将当前环境所有包及版本导出到文件 |
+| `pip install -r requirements.txt` | 从文件批量安装包 |
+| `pip check` | 检查已安装包的依赖关系是否完整、有无冲突 |
 
-# 若使用 pip install --upgrade pip 导致 pip 丢失使用如下命令找回
-python -m ensurepip
-# 再使用
-python3 -m pip install --upgrade pip
-```
+---
 
-```
-# 搜索包
-pip search package_name
+## ⚙️ 配置与信息
 
-# 显示包
-pip show package_name
-```
+| 命令 | 说明 |
+|------|------|
+| `pip --version` | 查看 pip 自身版本 |
+| `pip show pip` | 查看 pip 自身的详细信息 |
+| `pip config list` | 查看 pip 当前配置 |
+| `pip config set global.index-url <镜像源>` | 设置 pip 镜像源（如换成清华源） |
+| `pip help` | 查看 pip 帮助信息 |
+| `pip help <子命令>` | 查看某个子命令的详细帮助，如 `pip help install` |
 
-安装包临时指定镜像源
-```
-pip install package_name -i https://mirrors.aliyun.com/pypi/simple/
-```
+---
 
-设置镜像源
-```
-pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/
-```
+## 🧪 下载与缓存
 
-#### 导出当前 Python 环境的配置
-要导出当前 Python 环境的配置，你可以使用 pip freeze 命令。
-pip freeze 命令会列出当前环境中已安装的所有 Python 包及其版本信息，你可以将其保存到文件中，例如 requirements.txt，如下所示：
-```
-pip freeze > requirements.txt
-```
-以上命令将在当前目录下创建一个名为 requirements.txt 的文件，其中包含当前环境中已安装的所有包及其版本信息。然后，你可以在其他地方使用该文件来重新创建相同的环境，运行以下命令：
-```
-pip install -r requirements.txt
-```
-以上命令会根据 requirements.txt 中列出的包及其版本信息重新安装所有必需的包，从而重建相同的环境。
+| 命令 | 说明 |
+|------|------|
+| `pip download <包名>` | 下载包但不安装（可指定 `-d` 目标目录） |
+| `pip cache info` | 查看 pip 缓存使用情况 |
+| `pip cache purge` | 清空 pip 缓存 |
+
+---
+
+## 🎯 实用组合技
+
+| 场景 | 命令组合 |
+|------|----------|
+| **全新环境一键安装所有依赖** | `pip install -r requirements.txt` |
+| **批量升级所有过时包** | `pip list --outdated` 查看，再用 `pip install -U <包名>` 逐个升级（或用 `pip-review` 工具自动化） |
+| **迁移项目依赖到新环境** | 旧环境：`pip freeze > requirements.txt` → 新环境：`pip install -r requirements.txt` |
+| **解决依赖冲突** | `pip check` 检查冲突 → 手动调整版本号重新安装 |
+
+---
+
+## 💡 小贴士
+
+- 如果下载速度慢，可以临时换国内镜像源，例如清华源：
+  ```bash
+    安装包临时指定镜像源
+    pip install package_name -i https://mirrors.aliyun.com/pypi/simple/
+
+    设置镜像源
+    pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/`
+  ```
