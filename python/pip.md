@@ -7,6 +7,7 @@
 | `pip install <包名>` | 安装最新版本的包 |
 | `pip install <包名>==<版本号>` | 安装指定版本 |
 | `pip install <包名>>=<最低版本>` | 安装不低于某版本的包 |
+| `pip install "langchain-community>=0.4.0,<0.5.0` | 安装 0.4～0.5之间的安装包 |
 | `pip install -r requirements.txt` | 批量安装 requirements.txt 中列出的所有包 |
 | `pip install --upgrade <包名>` 或 `-U` | 升级包到最新版本 |
 | `pip uninstall <包名>` | 卸载包（会提示确认） |

@@ -2,7 +2,7 @@
 ```
 # 查看版本号
 psql -V 
-# 使用数据库超级管理员 postgres 身份进入
+# 使用数据库超级管理员 postgres 身份进入 
 sudo -u postgres psql 
 ```
 
@@ -81,4 +81,19 @@ sudo ufw allow 5432/tcp
 ```
 telnet ip port
 # 如果还不行请检查服务器示例安全组配置
+```
+
+
+psql终端操作命令
+```js
+\l               // 查看数据库列表
+\c 你的库名       // 选中进入目标库
+\dt             // 查看有数据表列表
+\dt+            // 查看有数据表列表带大小
+\d 表名         // 查看数据表结构
+```
+查表命令
+```js
+SELECT count(*) FROM "tableName"; // 统计表数据 表名周围的双引号与结尾的分号是必须的
+SELECT * FROM "tableName" LIMIT 10; // 查看表前10行数据
 ```
